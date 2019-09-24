@@ -11,6 +11,12 @@ After setting up a local toolchain and SDK, simply reference the Makefile provid
 
 ```
 
+The result will be a binary ROM image suitable for loading directly into an emulator:
+
+```
+    $ gens out/rom.bin
+```
+
 ## Build environment
 
 Putting in place a suitable SDK and toolchain has a few nuances. The following 
