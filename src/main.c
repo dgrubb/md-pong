@@ -7,6 +7,9 @@
 /* Platform includes */
 #include "genesis.h"
 
+/* Project includes */
+#include "screens.h"
+
 int main()
 {
     const char *title = "Hello, RGS!";
