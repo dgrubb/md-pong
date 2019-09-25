@@ -28,7 +28,8 @@ also be roughly applicable to other distributions such as Debian/Ubuntu.
 2. Checkout *gendev* (SGDK will be automatically checked out later in the process), assuming a "Projects" directory exists:
 
 ```
-    $ git clone https://github.com/kubilus1/gendev ~/Projects
+    $ cd ~/Projects
+    $ git clone https://github.com/kubilus1/gendev
 ```
 3. Build the mk68 toolchain and binutils:
 
