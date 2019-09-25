@@ -4,9 +4,11 @@
  * Date: 24/09/2019
  */
 
-/* Project includes */
-
 #ifndef TITLE_H_
 #define TITLE_H_
+
+void title_screen_init();
+void title_screen_show();
+void title_screen_hide();
 
 #endif /* TITLE_H_ */

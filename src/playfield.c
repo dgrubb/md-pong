@@ -1,5 +1,5 @@
 /*
- * File: title.c
+ * File: playfield.c
  * Author: dgrubb
  * Date: 24/09/2019
  */
@@ -8,22 +8,19 @@
 #include "genesis.h"
 
 /* Project includes */
-#include "title.h"
+#include "playfield.h"
 
 void
-title_screen_init()
+playfield_init()
 {
 }
 
 void
-title_screen_show()
+playfield_screen_show()
 {
-    BMP_clear();
 }
 
 void
-title_screen_hide()
+playfield_screen_hide()
 {
 }
-
-

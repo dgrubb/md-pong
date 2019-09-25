@@ -8,14 +8,13 @@
 #define SCREENS_H
 
 typedef enum {
-    TitleScreen = 0,
-    SinglePlayerScreen,
-    TwoPlayerScreen
+    Title = 0,
+    Playfield,
 } Screen_t;
 
 Screen_t current_screen;
 
-void screens_set_screen(Screen_t screen, bool force);
+void screens_set_screen(Screen_t screen, u16 force);
 void screens_show_screen(Screen_t screen);
 void screens_hide_screen(Screen_t screen);
 

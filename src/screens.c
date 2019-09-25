@@ -4,16 +4,19 @@
  * Date: 24/09/2019
  */
 
+/* Platform includes */
+#include "genesis.h"
+
 /* Project includes */
 #include "screens.h"
 #include "single_player.h"
 #include "title.h"
 #include "two_player.h"
 
-Screen_t current_screen = TitleScreen;
+Screen_t current_screen = Title;
 
 void
-screens_set_screen(Screen_t screen, bool force)
+screens_set_screen(Screen_t screen, u16 force)
 {
     if((!force) && (screen != current_screen)) {
         return;
@@ -27,14 +30,11 @@ void
 screens_show_screen(Screen_t screen)
 {
     switch(screen) {
-        case TitleScreen:
+        case Title:
             title_screen_show();
             break;
-        case SinglePlayerScreen:
-            single_player_screen_show();
-            break;
-        case TwoPlayerScreen:
-            two_player_screen_show();
+        case Playfield:
+            playfield_screen_show();
             break;
         default:
             break;
@@ -45,14 +45,11 @@ void
 screens_hide_screen(Screen_t screen)
 {
     switch(screen) {
-        case TitleScreen:
+        case Title:
             title_screen_hide();
             break;
-        case SinglePlayerScreen:
-            single_player_screen_hide();
-            break;
-        case TwoPlayerScreen:
-            two_player_screen_hide();
+        case Playfield:
+            playfield_screen_hide();
             break;
         default:
             break;
