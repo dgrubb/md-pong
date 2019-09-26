@@ -14,3 +14,19 @@ void
 credits_init()
 {
 }
+
+void
+credits_screen_show()
+{
+}
+
+void
+credits_screen_hide()
+{
+}
+
+void
+credits_controller_input(u16 controller_one_state, u16 controller_two_state)
+{
+
+}

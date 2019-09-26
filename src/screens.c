@@ -9,16 +9,16 @@
 
 /* Project includes */
 #include "screens.h"
-#include "single_player.h"
+#include "credits.h"
+#include "playfield.h"
 #include "title.h"
-#include "two_player.h"
 
 Screen_t current_screen = Title;
 
 void
 screens_set_screen(Screen_t screen, u16 force)
 {
-    if((!force) && (screen != current_screen)) {
+    if ((!force) && (screen != current_screen)) {
         return;
     }
     screens_hide_screen(current_screen);
@@ -29,12 +29,15 @@ screens_set_screen(Screen_t screen, u16 force)
 void
 screens_show_screen(Screen_t screen)
 {
-    switch(screen) {
+    switch (screen) {
         case Title:
             title_screen_show();
             break;
         case Playfield:
             playfield_screen_show();
+            break;
+        case Credits:
+            credits_screen_show();
             break;
         default:
             break;
@@ -44,15 +47,24 @@ screens_show_screen(Screen_t screen)
 void
 screens_hide_screen(Screen_t screen)
 {
-    switch(screen) {
+    switch (screen) {
         case Title:
             title_screen_hide();
             break;
         case Playfield:
             playfield_screen_hide();
             break;
+        case Credits:
+            credits_screen_hide();
+            break;
         default:
             break;
     }
+
+}
+
+void
+screens_controller_input(u16 controller_one_input, u16 controller_two_input)
+{
 
 }

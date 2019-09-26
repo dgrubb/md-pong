@@ -10,6 +10,9 @@
 /* Project includes */
 #include "title.h"
 
+/* Resource includes */
+#include "img.h"
+
 void
 title_screen_init()
 {
@@ -18,7 +21,13 @@ title_screen_init()
 void
 title_screen_show()
 {
-    BMP_clear();
+    /* Disable interrupts while accessing VDP memory */
+    SYS_disableInts();
+    VDP_resetScreen();
+    VDP_setScreenWidth320();
+    VDP_setScreenHeight224();
+    VDP_drawImage(PLAN_B, &background, 0, 0);
+    SYS_enableInts();
 }
 
 void
