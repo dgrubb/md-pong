@@ -8,7 +8,7 @@
 #define SCREENS_H
 
 /* Platform includes */
-#include "genesis.h"
+#include <genesis.h>
 
 /* Project includes */
 #include "credits.h"

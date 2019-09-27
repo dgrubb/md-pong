@@ -8,7 +8,7 @@
 #define TITLE_H_
 
 /* Platform includes */
-#include "genesis.h"
+#include <genesis.h>
 
 void title_screen_init();
 void title_screen_show();

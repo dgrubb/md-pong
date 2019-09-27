@@ -5,13 +5,14 @@
  */
 
 /* Platform includes */
-#include "genesis.h"
+#include <genesis.h>
 
 /* Project includes */
 #include "assets.h"
 #include "playfield.h"
 #include "screens.h"
 #include "title.h"
+
 
 /* Forward declarations */
 static void controllerHandler(u16 controller, u16 button, u16 state);
