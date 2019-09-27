@@ -10,6 +10,9 @@
 /* Platform includes */
 #include <genesis.h>
 
+/* Project includes */
+#include "assets.h"
+
 void title_screen_init();
 void title_screen_show();
 void title_screen_hide();

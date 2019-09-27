@@ -10,6 +10,7 @@
 /* Store pointers to instances of things created dynamically */
 assets_table_t assets_table;
 u16 palette_table[ASSET_COUNT];
+VDPPlan plane_table[ASSET_BG_COUNT];
 
 void
 assets_init()
@@ -19,19 +20,7 @@ assets_init()
     /* Initialise some default palettes, these
      * are liable to be updated during runtime
      */
-    palette_table[ASSET_PADDLE_P1] = PAL1;
-    palette_table[ASSET_PADDLE_P2] = PAL1;
-    palette_table[ASSET_BACKGROUND] = PAL2;
-    palette_table[ASSET_BALL] = PAL3;
-
-    /* Load tile and palette data for backgrounds and sprites*/
-    SYS_disableInts();
-    VDP_loadTileSet(background.tileset, 1, DMA);
-    VDP_setPalette(palette_table[ASSET_PADDLE_P1], paddle.palette->data);
-    VDP_setPalette(palette_table[ASSET_BACKGROUND], background.palette->data);
-    VDP_setPalette(palette_table[ASSET_BALL], ball.palette->data);
-    VDP_drawImage(PLAN_B, &background, 0, 0);
-    SYS_enableInts();
+    assets_load_default_palettes();
 
     /* Initialise the sprite engine and load data */
     SPR_init();
@@ -58,21 +47,71 @@ assets_init()
 }
 
 void
+assets_load_default_palettes()
+{
+    /* Initialise some default palettes, these
+     * are liable to be updated during runtime
+     */
+    palette_table[ASSET_PADDLE_P1] = PAL1;
+    palette_table[ASSET_PADDLE_P2] = PAL1;
+    palette_table[ASSET_BACKGROUND_TITLE] = PAL2;
+    palette_table[ASSET_BACKGROUND_CREDITS] = PAL2;
+    palette_table[ASSET_BACKGROUND_PLAYFIELD] = PAL2;
+    palette_table[ASSET_BALL] = PAL3;
+    SYS_disableInts();
+    VDP_setPalette(palette_table[ASSET_PADDLE_P1], paddle.palette->data);
+    VDP_setPalette(palette_table[ASSET_BACKGROUND_TITLE], background.palette->data);
+    VDP_setPalette(palette_table[ASSET_BALL], ball.palette->data);
+    SYS_enableInts();
+}
+
+void
+assets_draw_background(u16 asset)
+{
+    if (FALSE == assets_verify_asset(asset)) return;
+    SYS_disableInts();
+    VDP_loadTileSet(background.tileset, 1, DMA);
+    VDP_drawImage(plane_table[asset], &background, 0, 0);
+    SYS_enableInts();
+}
+
+void
+assets_clear_background(u16 asset)
+{
+    if (FALSE == assets_verify_asset(asset)) return;
+    VDP_clearPlan(plane_table[asset], TRUE);
+}
+
+void
 assets_set_visible(u16 asset, u16 visible)
 {
-    Sprite* asset_sprite;
+    if (FALSE == assets_verify_asset(asset)) return;
+    Sprite* asset_sprite = NULL;
+    u16 asset_bg = 0;
     switch (asset) {
         case ASSET_BALL: asset_sprite = assets_table.ball; break;
         case ASSET_PADDLE_P1: asset_sprite = assets_table.paddle_player_one; break;
         case ASSET_PADDLE_P2: asset_sprite = assets_table.paddle_player_two; break;
-        case ASSET_BACKGROUND:
+        case ASSET_BACKGROUND_TITLE:
             /* Intentional fall through */
+        case ASSET_BACKGROUND_PLAYFIELD:
+            /* Intentional fall through */
+        case ASSET_BACKGROUND_CREDITS:
+            asset_bg = asset;
+            break;
         case ASSET_COUNT:
             /* Intentional fall through */
         default:
             return;
     }
-    SPR_setVisibility(asset_sprite, visible);
+    if (NULL != asset_sprite) SPR_setVisibility(asset_sprite, visible);
+    if (asset_bg) {
+        if (visible) {
+            assets_draw_background(asset_bg);
+        } else {
+            assets_clear_background(asset_bg);
+        }
+    }
 }
 
 u16

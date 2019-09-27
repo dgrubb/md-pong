@@ -15,6 +15,7 @@ title_screen_init()
 void
 title_screen_show()
 {
+    assets_set_visible(ASSET_BACKGROUND_TITLE, TRUE);
 }
 
 void
