@@ -5,9 +5,6 @@
  */
 
 /* Platform includes */
-#include "genesis.h"
-
-/* Project includes */
 #include "credits.h"
 
 void

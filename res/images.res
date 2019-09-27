@@ -1,1 +1,1 @@
-IMAGE background "img/background.png" BEST
+IMAGE background "assets/background.png" BEST

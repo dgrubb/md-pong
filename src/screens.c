@@ -4,14 +4,8 @@
  * Date: 24/09/2019
  */
 
-/* Platform includes */
-#include "genesis.h"
-
 /* Project includes */
 #include "screens.h"
-#include "credits.h"
-#include "playfield.h"
-#include "title.h"
 
 Screen_t current_screen = Title;
 

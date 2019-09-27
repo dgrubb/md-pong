@@ -7,6 +7,9 @@
 #ifndef CREDITS_H_
 #define CREDITS_H_
 
+/* Platform includes */
+#include "genesis.h"
+
 void credits_init();
 void credits_screen_show();
 void credits_screen_hide();

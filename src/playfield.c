@@ -4,9 +4,6 @@
  * Date: 24/09/2019
  */
 
-/* Platform includes */
-#include "genesis.h"
-
 /* Project includes */
 #include "playfield.h"
 

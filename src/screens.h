@@ -7,6 +7,14 @@
 #ifndef SCREENS_H_
 #define SCREENS_H
 
+/* Platform includes */
+#include "genesis.h"
+
+/* Project includes */
+#include "credits.h"
+#include "playfield.h"
+#include "title.h"
+
 typedef enum {
     Title = 0,
     Playfield,
