@@ -46,16 +46,19 @@ title_update_selection(u16 option)
 }
 
 void
-title_controller_input(u16 controller, u16 button, u16 state)
+title_controller_input(u16 controller, u16 button, u16 down)
 {
     u16 new_option;
-    if ((button | BUTTON_START) || (button | BUTTON_A) || (button | BUTTON_B) || (button | BUTTON_C)) {
+
+    /* This screen only needs to respond to singular button down presses */
+    if (FALSE == down) return;
+
+    if ((button & BUTTON_START) || (button & BUTTON_A) || (button & BUTTON_B) || (button & BUTTON_C)) {
         /* Use is selecting an option */
-        /* TODO: set new screen */
         switch (current_option) {
             case TITLE_OPTION_ONE_PLAYER:
                 /* Intentional fall-through */
-            case TITLE_OPTION_ONE_PLAYER:
+            case TITLE_OPTION_TWO_PLAYER:
                 screens_set_screen(Playfield, FALSE);
                 return;
             case TITLE_OPTION_CREDITS:
@@ -65,7 +68,19 @@ title_controller_input(u16 controller, u16 button, u16 state)
         }
     }
 
-    
+    /* User is not selecting an option, instead they're navigating */
+    if (button & BUTTON_DOWN) {
+        new_option = current_option + 1;
+        if (new_option == TILE_OPTION_COUNT) {
+            new_option = TITLE_OPTION_ONE_PLAYER;
+        }
+    }
+    if (button & BUTTON_UP) {
+        if (current_option == TITLE_OPTION_ONE_PLAYER) {
+            new_option = TITLE_OPTION_COUNT;
+        }
+        new_option--;
+    }
 
     title_update_selection(new_option);
 }
