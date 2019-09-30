@@ -5,7 +5,7 @@
  */
 
 #ifndef SCREENS_H_
-#define SCREENS_H
+#define SCREENS_H_
 
 /* Platform includes */
 #include <genesis.h>
@@ -16,12 +16,10 @@
 #include "title.h"
 
 typedef enum {
-    Title = 0,
-    Playfield,
-    Credits
+    Screens_Title = 0,
+    Screens_Playfield,
+    Screens_Credits
 } Screen_t;
-
-Screen_t current_screen;
 
 void screens_set_screen(Screen_t screen, u16 force);
 void screens_show_screen(Screen_t screen);

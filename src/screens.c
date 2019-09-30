@@ -7,7 +7,7 @@
 /* Project includes */
 #include "screens.h"
 
-Screen_t current_screen = Title;
+Screen_t current_screen = Screens_Title;
 
 void
 screens_set_screen(Screen_t screen, u16 force)
@@ -24,13 +24,13 @@ void
 screens_show_screen(Screen_t screen)
 {
     switch (screen) {
-        case Title:
+        case Screens_Title:
             title_screen_show();
             break;
-        case Playfield:
+        case Screens_Playfield:
             playfield_screen_show();
             break;
-        case Credits:
+        case Screens_Credits:
             credits_screen_show();
             break;
         default:
@@ -42,13 +42,13 @@ void
 screens_hide_screen(Screen_t screen)
 {
     switch (screen) {
-        case Title:
+        case Screens_Title:
             title_screen_hide();
             break;
-        case Playfield:
+        case Screens_Playfield:
             playfield_screen_hide();
             break;
-        case Credits:
+        case Screens_Credits:
             credits_screen_hide();
             break;
         default:

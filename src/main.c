@@ -25,7 +25,7 @@ int main()
      * loading sprite data)
      */
     assets_init();
-    screens_set_screen(Title, TRUE);
+    screens_set_screen(Screens_Title, TRUE);
 
     /* Begin allowing user input */
     JOY_setEventHandler(controllerHandler);

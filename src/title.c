@@ -7,7 +7,7 @@
 /* Project includes */
 #include "title.h"
 
-u16 current_selection = TITLE_OPTION_ONE_PLAYER;
+u16 current_option = TITLE_OPTION_ONE_PLAYER;
 
 void
 title_screen_init()
@@ -17,8 +17,11 @@ title_screen_init()
 void
 title_screen_show()
 {
-    assets_set_visible(ASSET_BACKGROUND_TITLE, TRUE);
-    VDP_drawTextBG(PLAN_B, "Pong", 16, 1);
+    assets_set_visible(ASSET_BACKGROUND_TITLE, VISIBLE);
+    assets_set_visible(ASSET_ONE_PLAYER, VISIBLE);
+    assets_set_visible(ASSET_TWO_PLAYER, VISIBLE);
+    assets_set_visible(ASSET_CREDITS, VISIBLE);
+    title_update_selection(TITLE_OPTION_ONE_PLAYER);
 }
 
 void
@@ -30,19 +33,26 @@ title_screen_hide()
 void
 title_focus_element(u16 option, u16 focus)
 {
+    u16 asset;
+    switch (option) {
+        case TITLE_OPTION_ONE_PLAYER: asset = ASSET_ONE_PLAYER; break;
+        case TITLE_OPTION_TWO_PLAYER: asset = ASSET_TWO_PLAYER; break;
+        case TITLE_OPTION_CREDITS: asset = ASSET_CREDITS; break;
+        default: return;
+    }
     if (focus) {
-        /* TODO: draw appropriate sprites */
+        assets_set_asset_palette(asset, ASSET_PADDLE_P1);
     } else {
-        /* TODO: draw appropriate sprites */
+        assets_set_asset_palette(asset, ASSET_BALL);
     }
 }
 
 void
 title_update_selection(u16 option)
 {
-    title_focus_element(current_option, FALSE)
+    title_focus_element(current_option, FALSE);
     current_option = option;
-    title_focus_element(current_option, TRUE)
+    title_focus_element(current_option, TRUE);
 }
 
 void
@@ -59,10 +69,10 @@ title_controller_input(u16 controller, u16 button, u16 down)
             case TITLE_OPTION_ONE_PLAYER:
                 /* Intentional fall-through */
             case TITLE_OPTION_TWO_PLAYER:
-                screens_set_screen(Playfield, FALSE);
+                screens_set_screen(Screens_Playfield, FALSE);
                 return;
             case TITLE_OPTION_CREDITS:
-                screens_set_screen(Credits, FALSE);
+                screens_set_screen(Screens_Credits, FALSE);
                 return;
             default: break;
         }
@@ -71,7 +81,7 @@ title_controller_input(u16 controller, u16 button, u16 down)
     /* User is not selecting an option, instead they're navigating */
     if (button & BUTTON_DOWN) {
         new_option = current_option + 1;
-        if (new_option == TILE_OPTION_COUNT) {
+        if (new_option == TITLE_OPTION_COUNT) {
             new_option = TITLE_OPTION_ONE_PLAYER;
         }
     }
