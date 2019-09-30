@@ -24,6 +24,6 @@ typedef enum {
 void screens_set_screen(Screen_t screen, u16 force);
 void screens_show_screen(Screen_t screen);
 void screens_hide_screen(Screen_t screen);
-void screens_controller_input(u16 controller_one_input, u16 controller_two_input);
+void screens_controller_input(u16 controller, u16 button, u16 down);
 
 #endif /* SCREENS_H_ */

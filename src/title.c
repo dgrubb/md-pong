@@ -17,17 +17,16 @@ title_screen_init()
 void
 title_screen_show()
 {
-    assets_set_visible(ASSET_BACKGROUND_TITLE, VISIBLE);
-    assets_set_visible(ASSET_ONE_PLAYER, VISIBLE);
-    assets_set_visible(ASSET_TWO_PLAYER, VISIBLE);
-    assets_set_visible(ASSET_CREDITS, VISIBLE);
+    assets_draw_background(ASSET_BACKGROUND_TITLE);
+    assets_set_visible(ASSET_SPRITE_ONE_PLAYER, VISIBLE);
+    assets_set_visible(ASSET_SPRITE_TWO_PLAYER, VISIBLE);
+    assets_set_visible(ASSET_SPRITE_CREDITS, VISIBLE);
     title_update_selection(TITLE_OPTION_ONE_PLAYER);
 }
 
 void
 title_screen_hide()
 {
-    assets_set_visible(ASSET_BACKGROUND_TITLE, FALSE);
 }
 
 void
@@ -35,15 +34,15 @@ title_focus_element(u16 option, u16 focus)
 {
     u16 asset;
     switch (option) {
-        case TITLE_OPTION_ONE_PLAYER: asset = ASSET_ONE_PLAYER; break;
-        case TITLE_OPTION_TWO_PLAYER: asset = ASSET_TWO_PLAYER; break;
-        case TITLE_OPTION_CREDITS: asset = ASSET_CREDITS; break;
+        case TITLE_OPTION_ONE_PLAYER: asset = ASSET_SPRITE_ONE_PLAYER; break;
+        case TITLE_OPTION_TWO_PLAYER: asset = ASSET_SPRITE_TWO_PLAYER; break;
+        case TITLE_OPTION_CREDITS: asset = ASSET_SPRITE_CREDITS; break;
         default: return;
     }
     if (focus) {
-        assets_set_asset_palette(asset, ASSET_PADDLE_P1);
+        assets_set_sprite_palette(asset, ASSET_SPRITE_PADDLE_P1);
     } else {
-        assets_set_asset_palette(asset, ASSET_BALL);
+        assets_set_sprite_palette(asset, ASSET_SPRITE_BALL);
     }
 }
 
@@ -86,10 +85,11 @@ title_controller_input(u16 controller, u16 button, u16 down)
         }
     }
     if (button & BUTTON_UP) {
+        new_option = current_option;
         if (current_option == TITLE_OPTION_ONE_PLAYER) {
             new_option = TITLE_OPTION_COUNT;
         }
-        new_option--;
+        new_option--;;
     }
 
     title_update_selection(new_option);

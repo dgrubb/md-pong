@@ -28,6 +28,7 @@ int main()
     screens_set_screen(Screens_Title, TRUE);
 
     /* Begin allowing user input */
+    JOY_init();
     JOY_setEventHandler(controllerHandler);
 
     /* Main game loop */
@@ -42,6 +43,7 @@ int main()
 static void
 controllerHandler(u16 controller, u16 button, u16 state)
 {
+    screens_controller_input(controller, button, state);
 }
 
 void

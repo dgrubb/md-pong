@@ -58,7 +58,10 @@ screens_hide_screen(Screen_t screen)
 }
 
 void
-screens_controller_input(u16 controller_one_input, u16 controller_two_input)
+screens_controller_input(u16 controller, u16 button, u16 down)
 {
-
+    switch (current_screen) {
+        case Screens_Title: title_controller_input(controller, button, down); break;
+        default: break;
+    }
 }
