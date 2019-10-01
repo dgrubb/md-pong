@@ -17,6 +17,17 @@ The result will be a binary ROM image suitable for loading directly into an emul
     $ gens out/rom.bin
 ```
 
+## Image resources
+
+The Mega Drive colour palette is a little limited: nine colours per palette, with up to four palettes. 
+The rescomp tool, which is part of SGDK, can convert oridinary PNGs to title data but has some strict 
+requirements reflecting the restrictions of the Mega Drive VDP. I've had reasonable success with rescomp 
+by first pre-processing PNGs to a suitable palette and bit-depth (requires ImageMagick installed):
+
+```
+    $ convert input_image.png -alpha off -type palette -colors 9 PNG8:output_image.png
+```
+
 ## Build environment
 
 Putting in place a suitable SDK and toolchain has a few nuances. The following 
