@@ -8,14 +8,14 @@
 #include "assets.h"
 
 /* Store pointers to instances of things created dynamically */
-assets_sprite_table_t assets_sprite_table;
+Sprite* assets_sprite_table[ASSET_SPRITE_COUNT];
 u16 palette_table[ASSET_SPRITE_COUNT + ASSET_BACKGROUND_COUNT];
 VDPPlan plane_table[ASSET_BACKGROUND_COUNT];
 
 void
 assets_init()
 {
-    memset(&assets_sprite_table, 0, sizeof(assets_sprite_table_t));
+    memset(&assets_sprite_table, 0, ASSET_SPRITE_COUNT);
 
     /* Initialise some default palettes, these
      * are liable to be updated during runtime
@@ -24,48 +24,44 @@ assets_init()
 
     /* Initialise the sprite engine and load data */
     SPR_init();
-    assets_sprite_table.paddle_player_one = SPR_addSprite(
-        &paddle,                                                    /* Image pointer */
-        20, 10,                                                     /* X, Y coordinates */
-        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P1], 0, TRUE, FALSE)   /* Tile data */
+    assets_sprite_table[ASSET_SPRITE_PADDLE_P1] = SPR_addSprite(
+        &paddle,                                                            /* Image pointer */
+        20, 10,                                                             /* X, Y coordinates */
+        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P1], 0, FALSE, FALSE)   /* Tile data */
     );
-    assets_sprite_table.paddle_player_two = SPR_addSprite(
+    assets_sprite_table[ASSET_SPRITE_PADDLE_P2] = SPR_addSprite(
         &paddle,
         20, 40,
-        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P2], 0, TRUE, FALSE)
+        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P2], 0, FALSE, FALSE)
     );
-    assets_sprite_table.ball = SPR_addSprite(
+    assets_sprite_table[ASSET_SPRITE_BALL] = SPR_addSprite(
         &ball,
         20, 50,
-        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, TRUE, FALSE)
+        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
-    assets_sprite_table.title_one_player = SPR_addSprite(
+    assets_sprite_table[ASSET_SPRITE_ONE_PLAYER] = SPR_addSprite(
         &title_1up,
         120, 10,
-        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, TRUE, FALSE)
+        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
-    assets_sprite_table.title_two_player = SPR_addSprite(
+    assets_sprite_table[ASSET_SPRITE_TWO_PLAYER] = SPR_addSprite(
         &title_2up,
         120, 40,
-        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, TRUE, FALSE)
+        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
-    assets_sprite_table.title_credits = SPR_addSprite(
+    assets_sprite_table[ASSET_SPRITE_CREDITS] = SPR_addSprite(
         &title_1up,
         120, 60,
-        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, TRUE, FALSE)
+        TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
 
     /* Hide all sprites until called for */
-    SPR_setVisibility(assets_sprite_table.paddle_player_one, HIDDEN);
-    SPR_setVFlip(assets_sprite_table.paddle_player_one, TRUE);
-    SPR_setVisibility(assets_sprite_table.paddle_player_two, HIDDEN);
-    SPR_setVisibility(assets_sprite_table.ball, HIDDEN);
-    SPR_setVisibility(assets_sprite_table.title_one_player, HIDDEN);
-    SPR_setVFlip(assets_sprite_table.title_one_player, FALSE);
-    SPR_setVisibility(assets_sprite_table.title_two_player, HIDDEN);
-    SPR_setVFlip(assets_sprite_table.title_two_player, FALSE);
-    SPR_setVisibility(assets_sprite_table.title_credits, HIDDEN);
-    SPR_setVFlip(assets_sprite_table.title_credits, FALSE);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_PADDLE_P1], HIDDEN);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_PADDLE_P2], HIDDEN);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_BALL], HIDDEN);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_ONE_PLAYER], HIDDEN);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_TWO_PLAYER], HIDDEN);
+    SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_CREDITS], HIDDEN);
 }
 
 void
@@ -128,18 +124,8 @@ assets_set_palette(u16 palette, u16* palette_data)
 Sprite*
 assets_get_sprite_ptr(u16 asset)
 {
-    Sprite* asset_sprite = NULL;
-    if (FALSE == assets_verify_sprite_asset(asset)) return asset_sprite;
-    switch (asset) {
-        case ASSET_SPRITE_BALL: asset_sprite = assets_sprite_table.ball; break;
-        case ASSET_SPRITE_PADDLE_P1: asset_sprite = assets_sprite_table.paddle_player_one; break;
-        case ASSET_SPRITE_PADDLE_P2: asset_sprite = assets_sprite_table.paddle_player_two; break;
-        case ASSET_SPRITE_ONE_PLAYER: asset_sprite = assets_sprite_table.title_one_player; break;
-        case ASSET_SPRITE_TWO_PLAYER: asset_sprite = assets_sprite_table.title_two_player; break;
-        case ASSET_SPRITE_CREDITS: asset_sprite = assets_sprite_table.title_credits; break;
-        default: break;
-    }
-    return asset_sprite;
+    if (FALSE == assets_verify_sprite_asset(asset)) return NULL;
+    return assets_sprite_table[asset];
 }
 
 u16

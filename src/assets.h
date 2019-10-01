@@ -31,15 +31,6 @@ typedef enum {
     ASSET_BACKGROUND_COUNT
 } assets_asset;
 
-typedef struct {
-    Sprite* paddle_player_one;
-    Sprite* paddle_player_two;
-    Sprite* ball;
-    Sprite* title_one_player;
-    Sprite* title_two_player;
-    Sprite* title_credits;
-} assets_sprite_table_t;
-
 void assets_init();
 void assets_set_visible(u16 asset, u16 visible);
 u16 assets_verify_sprite_asset(u16 asset);
