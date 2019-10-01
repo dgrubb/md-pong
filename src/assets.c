@@ -33,8 +33,8 @@ assets_init()
     );
     assets_sprite_table[ASSET_SPRITE_PADDLE_P2] = SPR_addSprite(
         &paddle,
-        20, 40,
-        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P2], 0, FALSE, FALSE)
+        60, 40,
+        TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P2], 0, FALSE, TRUE)
     );
     assets_sprite_table[ASSET_SPRITE_BALL] = SPR_addSprite(
         &ball,
