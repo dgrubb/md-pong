@@ -12,7 +12,7 @@ Screen_t current_screen = Screens_Title;
 void
 screens_set_screen(Screen_t screen, u16 force)
 {
-    if ((!force) && (screen != current_screen)) {
+    if ((!force) && (screen == current_screen)) {
         return;
     }
     screens_hide_screen(current_screen);
@@ -54,7 +54,6 @@ screens_hide_screen(Screen_t screen)
         default:
             break;
     }
-
 }
 
 void
@@ -62,6 +61,7 @@ screens_controller_input(u16 controller, u16 button, u16 down)
 {
     switch (current_screen) {
         case Screens_Title: title_controller_input(controller, button, down); break;
+        case Screens_Credits: credits_controller_input(controller, button, down); break;
         default: break;
     }
 }

@@ -27,6 +27,10 @@ title_screen_show()
 void
 title_screen_hide()
 {
+    assets_set_visible(ASSET_SPRITE_ONE_PLAYER, HIDDEN);
+    assets_set_visible(ASSET_SPRITE_TWO_PLAYER, HIDDEN);
+    assets_set_visible(ASSET_SPRITE_CREDITS, HIDDEN);
+    assets_clear_background(ASSET_BACKGROUND_TITLE);
 }
 
 void

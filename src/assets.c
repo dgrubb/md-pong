@@ -9,13 +9,15 @@
 
 /* Store pointers to instances of things created dynamically */
 Sprite* assets_sprite_table[ASSET_SPRITE_COUNT];
+Image* assets_image_table[ASSET_BACKGROUND_COUNT];
 u16 palette_table[ASSET_SPRITE_COUNT + ASSET_BACKGROUND_COUNT];
 VDPPlan plane_table[ASSET_BACKGROUND_COUNT];
 
 void
 assets_init()
 {
-    memset(&assets_sprite_table, 0, ASSET_SPRITE_COUNT);
+    memset(&assets_sprite_table, 0, sizeof(Sprite*) * ASSET_SPRITE_COUNT);
+    memset(&assets_image_table, 0, sizeof(Image*) * ASSET_BACKGROUND_COUNT);
 
     /* Initialise some default palettes, these
      * are liable to be updated during runtime
@@ -41,7 +43,7 @@ assets_init()
     );
     assets_sprite_table[ASSET_SPRITE_ONE_PLAYER] = SPR_addSprite(
         &title_1up,
-        120, 10,
+        120, 20,
         TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
     assets_sprite_table[ASSET_SPRITE_TWO_PLAYER] = SPR_addSprite(
