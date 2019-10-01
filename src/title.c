@@ -44,7 +44,7 @@ title_focus_element(u16 option, u16 focus)
         default: return;
     }
     if (focus) {
-        assets_set_sprite_palette(asset, ASSET_SPRITE_PADDLE_P1);
+        assets_set_sprite_palette(asset, ASSET_SPRITE_ONE_PLAYER);
     } else {
         assets_set_sprite_palette(asset, ASSET_SPRITE_BALL);
     }

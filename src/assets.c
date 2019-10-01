@@ -9,7 +9,7 @@
 
 /* Store pointers to instances of things created dynamically */
 Sprite* assets_sprite_table[ASSET_SPRITE_COUNT];
-Image* assets_image_table[ASSET_BACKGROUND_COUNT];
+const Image* assets_image_table[ASSET_BACKGROUND_COUNT];
 u16 palette_table[ASSET_SPRITE_COUNT + ASSET_BACKGROUND_COUNT];
 VDPPlan plane_table[ASSET_BACKGROUND_COUNT];
 
@@ -64,6 +64,12 @@ assets_init()
     SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_ONE_PLAYER], HIDDEN);
     SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_TWO_PLAYER], HIDDEN);
     SPR_setVisibility(assets_sprite_table[ASSET_SPRITE_CREDITS], HIDDEN);
+
+    /* Load image data pointers
+     */
+    assets_image_table[ASSET_BACKGROUND_TITLE] = &background;
+    assets_image_table[ASSET_BACKGROUND_PLAYFIELD] = &background;
+    assets_image_table[ASSET_BACKGROUND_CREDITS] = &background;
 }
 
 void
@@ -72,19 +78,23 @@ assets_load_default_palettes()
     /* Initialise some default palettes, these
      * are liable to be updated during runtime
      */
-    palette_table[ASSET_SPRITE_PADDLE_P1] = PAL1;
-    palette_table[ASSET_SPRITE_PADDLE_P2] = PAL1;
+    palette_table[ASSET_SPRITE_PADDLE_P1] = PAL0;
+    palette_table[ASSET_SPRITE_PADDLE_P2] = PAL0;
+    palette_table[ASSET_SPRITE_BALL] = PAL0;
     palette_table[ASSET_SPRITE_ONE_PLAYER] = PAL1;
     palette_table[ASSET_SPRITE_TWO_PLAYER] = PAL1;
     palette_table[ASSET_SPRITE_CREDITS] = PAL1;
     palette_table[ASSET_BACKGROUND_TITLE] = PAL2;
     palette_table[ASSET_BACKGROUND_CREDITS] = PAL2;
     palette_table[ASSET_BACKGROUND_PLAYFIELD] = PAL2;
-    palette_table[ASSET_SPRITE_BALL] = PAL3;
+    /* Now load some data into the available palettes.
+     * This is also liable to be updated during execution.
+     */
     SYS_disableInts();
-    VDP_setPalette(palette_table[ASSET_SPRITE_PADDLE_P1], title_1up.palette->data);
-    VDP_setPalette(palette_table[ASSET_BACKGROUND_TITLE], background.palette->data);
-    VDP_setPalette(palette_table[ASSET_SPRITE_BALL], ball.palette->data);
+    VDP_setPalette(PAL0, paddle.palette->data);
+    VDP_setPalette(PAL1, title_1up.palette->data);
+    VDP_setPalette(PAL2, background.palette->data);
+    VDP_setPalette(PAL3, ball.palette->data);
     SYS_enableInts();
 }
 
@@ -93,7 +103,7 @@ assets_draw_background(u16 asset)
 {
     if (FALSE == assets_verify_background_asset(asset)) return;
     SYS_disableInts();
-    VDP_loadTileSet(background.tileset, 1, DMA);
+    VDP_loadTileSet(assets_image_table[asset]->tileset, TILE_USERINDEX, DMA);
     VDP_drawImage(plane_table[asset], &background, 0, 0);
     SYS_enableInts();
 }
