@@ -13,7 +13,6 @@
 #include "screens.h"
 #include "title.h"
 
-
 /* Forward declarations */
 static void controllerHandler(u16 controller, u16 button, u16 state);
 void display_setup();
@@ -33,6 +32,9 @@ int main()
 
     /* Main game loop */
     for (;;) {
+        if (Screens_Playfield == screens_get_current_screen()) {
+            playfield_update();
+        }
         SPR_update();
         VDP_waitVSync();
     }

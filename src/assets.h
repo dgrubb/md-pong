@@ -41,5 +41,6 @@ Sprite* assets_get_sprite_ptr(u16 asset);
 void assets_load_default_palettes();
 void assets_set_palette(u16 palette, u16* palette_data);
 void assets_set_sprite_palette(u16 asset, u16 palette);
+void assets_set_sprite_coordinates(u16 asset, s16 x, s16 y);
 
 #endif /* ASSETS_H_ */

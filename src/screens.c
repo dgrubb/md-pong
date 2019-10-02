@@ -56,12 +56,19 @@ screens_hide_screen(Screen_t screen)
     }
 }
 
+Screen_t
+screens_get_current_screen()
+{
+    return current_screen;
+}
+
 void
-screens_controller_input(u16 controller, u16 button, u16 down)
+screens_controller_input(u16 controller, u16 button, u16 state)
 {
     switch (current_screen) {
-        case Screens_Title: title_controller_input(controller, button, down); break;
-        case Screens_Credits: credits_controller_input(controller, button, down); break;
+        case Screens_Credits: credits_controller_input(controller, button, state); break;
+        case Screens_Playfield: playfield_controller_input(controller, button, state); break;
+        case Screens_Title: title_controller_input(controller, button, state); break;
         default: break;
     }
 }

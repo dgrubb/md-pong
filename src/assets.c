@@ -28,17 +28,17 @@ assets_init()
     SPR_init();
     assets_sprite_table[ASSET_SPRITE_PADDLE_P1] = SPR_addSprite(
         &paddle,                                                            /* Image pointer */
-        20, 10,                                                             /* X, Y coordinates */
+        24, 100,                                                             /* X, Y coordinates */
         TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P1], 0, FALSE, FALSE)   /* Tile data */
     );
     assets_sprite_table[ASSET_SPRITE_PADDLE_P2] = SPR_addSprite(
         &paddle,
-        60, 40,
+        296, 100,
         TILE_ATTR(palette_table[ASSET_SPRITE_PADDLE_P2], 0, FALSE, TRUE)
     );
     assets_sprite_table[ASSET_SPRITE_BALL] = SPR_addSprite(
         &ball,
-        20, 50,
+        156, 50,
         TILE_ATTR(palette_table[ASSET_SPRITE_BALL], 0, FALSE, FALSE)
     );
     assets_sprite_table[ASSET_SPRITE_ONE_PLAYER] = SPR_addSprite(
@@ -80,13 +80,13 @@ assets_load_default_palettes()
      */
     palette_table[ASSET_SPRITE_PADDLE_P1] = PAL0;
     palette_table[ASSET_SPRITE_PADDLE_P2] = PAL0;
-    palette_table[ASSET_SPRITE_BALL] = PAL0;
     palette_table[ASSET_SPRITE_ONE_PLAYER] = PAL1;
     palette_table[ASSET_SPRITE_TWO_PLAYER] = PAL1;
     palette_table[ASSET_SPRITE_CREDITS] = PAL1;
     palette_table[ASSET_BACKGROUND_TITLE] = PAL2;
     palette_table[ASSET_BACKGROUND_CREDITS] = PAL2;
     palette_table[ASSET_BACKGROUND_PLAYFIELD] = PAL2;
+    palette_table[ASSET_SPRITE_BALL] = PAL3;
     /* Now load some data into the available palettes.
      * This is also liable to be updated during execution.
      */
@@ -138,6 +138,13 @@ assets_get_sprite_ptr(u16 asset)
 {
     if (FALSE == assets_verify_sprite_asset(asset)) return NULL;
     return assets_sprite_table[asset];
+}
+
+void
+assets_set_sprite_coordinates(u16 asset, s16 x, s16 y)
+{
+    Sprite* asset_sprite = assets_get_sprite_ptr(asset);
+    if (NULL != asset_sprite) SPR_setPosition(asset_sprite, x, y);
 }
 
 u16

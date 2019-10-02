@@ -29,10 +29,10 @@ credits_screen_hide()
 }
 
 void
-credits_controller_input(u16 controller, u16 button, u16 down)
+credits_controller_input(u16 controller, u16 button, u16 state)
 {
     /* This screen only needs to respond to singular button down presses */
-    if (FALSE == down) return;
+    if (FALSE == state) return;
 
     if ((button & BUTTON_START) || (button & BUTTON_A) || (button & BUTTON_B) || (button & BUTTON_C)) {
         screens_set_screen(Screens_Title, FALSE);
