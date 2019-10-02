@@ -28,5 +28,6 @@ void playfield_update();
 void playfield_controller_input(u16 controller, u16 button, u16 state);
 void playfield_reset_elements();
 void playfield_update_player(u16 player);
+u16 playfield_test_boundaries(s16 y);
 
 #endif /* PLAYFIELD_H_ */

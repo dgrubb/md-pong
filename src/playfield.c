@@ -70,7 +70,17 @@ playfield_update_player(u16 player)
     } else {
         paddles[player].velocity = 0;
     }
-    paddles[player].y += paddles[player].velocity;
+    if (TRUE == playfield_test_boundaries(paddles[player].y + paddles[player].velocity)) {
+        paddles[player].y += paddles[player].velocity;
+    }
+}
+
+u16
+playfield_test_boundaries(s16 y)
+{
+    if (y <= 0) return FALSE;
+    if (y >= 200) return FALSE;
+    return TRUE;
 }
 
 void
