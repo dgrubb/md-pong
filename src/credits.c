@@ -15,17 +15,17 @@ credits_init()
 void
 credits_screen_show()
 {
-    VDP_drawTextBG(PLAN_B, "By dgrubb", 15, 37);
-    VDP_drawTextBG(PLAN_B, "With special thanks", 10, 40);
-    VDP_drawTextBG(PLAN_B, "to Retro Game Squad", 10, 41);
-    VDP_drawTextBG(PLAN_B, "and Discord members:", 10, 42);
-    VDP_drawTextBG(PLAN_B, "@inkypinkyandclyde and @RGSJon", 5, 45);
+    VDP_drawTextBG(VDP_PLAN_B, "By dgrubb", 15, 37);
+    VDP_drawTextBG(VDP_PLAN_B, "With special thanks", 10, 40);
+    VDP_drawTextBG(VDP_PLAN_B, "to Retro Game Squad", 10, 41);
+    VDP_drawTextBG(VDP_PLAN_B, "and Discord members:", 10, 42);
+    VDP_drawTextBG(VDP_PLAN_B, "@inkypinkyandclyde and @RGSJon", 5, 45);
 }
 
 void
 credits_screen_hide()
 {
-    VDP_clearPlan(PLAN_B, TRUE);
+    VDP_resetScreen();
 }
 
 void

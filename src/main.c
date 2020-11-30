@@ -14,7 +14,7 @@
 #include "title.h"
 
 /* Forward declarations */
-static void controllerHandler(u16 controller, u16 button, u16 state);
+static void controller_handler(u16 controller, u16 button, u16 state);
 void display_setup();
 
 int main()
@@ -28,13 +28,10 @@ int main()
 
     /* Begin allowing user input */
     JOY_init();
-    JOY_setEventHandler(controllerHandler);
+    JOY_setEventHandler(controller_handler);
 
     /* Main game loop */
     for (;;) {
-        if (Screens_Playfield == screens_get_current_screen()) {
-            playfield_update();
-        }
         SPR_update();
         VDP_waitVSync();
     }
@@ -43,7 +40,7 @@ int main()
 }
 
 static void
-controllerHandler(u16 controller, u16 button, u16 state)
+controller_handler(u16 controller, u16 button, u16 state)
 {
     screens_controller_input(controller, button, state);
 }
