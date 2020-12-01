@@ -24,6 +24,7 @@ int main()
      * loading sprite data)
      */
     assets_init();
+    title_screen_init();
     screens_set_screen(Screens_Title, TRUE);
 
     /* Begin allowing user input */
@@ -56,4 +57,6 @@ display_setup()
     VDP_setScreenWidth320();
     VDP_setScreenHeight224();
     SYS_enableInts();
+    /* Start sprite engine to allow for dynamically allocating */
+    SPR_init(0, 0, 0);
 }

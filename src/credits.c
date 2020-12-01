@@ -15,6 +15,7 @@ credits_init()
 void
 credits_screen_show()
 {
+    VDP_resetScreen();
     VDP_drawTextBG(VDP_PLAN_B, "By dgrubb", 15, 37);
     VDP_drawTextBG(VDP_PLAN_B, "With special thanks", 10, 40);
     VDP_drawTextBG(VDP_PLAN_B, "to Retro Game Squad", 10, 41);
