@@ -41,7 +41,6 @@ title_screen_init_sprite(const SpriteDefinition* sprite, option_t option, u16 pa
 void
 title_screen_show()
 {
-    VDP_resetScreen();
     title_set_palettes();
     VDP_drawImageEx(BG_B, &title_background, 0, 0, 0, PAL0, TRUE);
     title_set_option(DEFAULT_OPTION);
@@ -50,8 +49,13 @@ title_screen_show()
 void
 title_screen_hide()
 {
-    VDP_resetScreen();
+    int i=0;
     current_option = DEFAULT_OPTION;
+    while (i<TITLE_OPTION_COUNT) {
+        SPR_setVisibility(options[i].res[TITLE_OPTION_INACTIVE], HIDDEN);
+        SPR_setVisibility(options[i].res[TITLE_OPTION_ACTIVE], HIDDEN);
+        i++;
+    }
 }
 
 void

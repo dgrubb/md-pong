@@ -15,18 +15,19 @@ credits_init()
 void
 credits_screen_show()
 {
-    VDP_resetScreen();
-    VDP_drawTextBG(VDP_PLAN_B, "By dgrubb", 15, 37);
-    VDP_drawTextBG(VDP_PLAN_B, "With special thanks", 10, 40);
-    VDP_drawTextBG(VDP_PLAN_B, "to Retro Game Squad", 10, 41);
-    VDP_drawTextBG(VDP_PLAN_B, "and Discord members:", 10, 42);
-    VDP_drawTextBG(VDP_PLAN_B, "@inkypinkyandclyde and @RGSJon", 5, 45);
+    VDP_setPalette(PAL0, title_background.palette->data);
+    VDP_drawImageEx(BG_B, &title_background, 0, 0, 0, PAL0, TRUE);
+
+    VDP_drawTextBG(BG_B, "By dgrubb", 15, 37);
+    VDP_drawTextBG(BG_B, "With special thanks", 10, 40);
+    VDP_drawTextBG(BG_B, "to Retro Game Squad", 10, 41);
+    VDP_drawTextBG(BG_B, "and Discord members:", 10, 42);
+    VDP_drawTextBG(BG_B, "@inkypinkyandclyde and @RGSJon", 5, 45);
 }
 
 void
 credits_screen_hide()
 {
-    VDP_resetScreen();
 }
 
 void
