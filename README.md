@@ -1,6 +1,8 @@
 # md-pong
 A simple example Mega Drive game (pong) built using SGDK
 
+![md-pong main menu](./preview/md-pong-main-menu.png)
+
 ## Build instructions
 
 After setting up a local toolchain and SDK, simply reference the Makefile provided by gendev:
